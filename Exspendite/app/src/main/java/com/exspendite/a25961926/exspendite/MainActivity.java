@@ -1,11 +1,9 @@
 package com.exspendite.a25961926.exspendite;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,17 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        defineButtons();
     }
 
     @Override
@@ -34,6 +22,79 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+    public void defineButtons()
+    {
+        findViewById(R.id.btnJan).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnFeb).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnMar).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnApr).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnMay).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnJune).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnJuly).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnAug).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnSept).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnOct).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnNov).setOnClickListener(buttonClickListener);
+        findViewById(R.id.btnDec).setOnClickListener(buttonClickListener);
+    }
+    private View.OnClickListener buttonClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            switch (view.getId())
+            {
+                case R.id.btnJan:
+                    Intent January = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(January);
+                    break;
+                case R.id.btnFeb:
+                    Intent February = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(February);
+                    break;
+                case R.id.btnMar:
+                    Intent March = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(March);
+                    break;
+                case R.id.btnApr:
+                    Intent April = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(April);
+                    break;
+                case R.id.btnMay:
+                    Intent May = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(May);
+                    break;
+                case R.id.btnJune:
+                    Intent June = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(June);
+                    break;
+                case R.id.btnJuly:
+                    Intent July = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(July);
+                    break;
+                case R.id.btnAug:
+                    Intent August = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(August);
+                    break;
+                case R.id.btnSept:
+                    Intent September = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(September);
+                    break;
+                case R.id.btnOct:
+                    Intent October = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(October);
+                    break;
+                case R.id.btnNov:
+                    Intent November = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(November);
+                    break;
+                case R.id.btnDec:
+                    Intent December = new Intent(MainActivity.this, ViewReceipts.class);
+                    startActivity(December);
+                    break;
+            }
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

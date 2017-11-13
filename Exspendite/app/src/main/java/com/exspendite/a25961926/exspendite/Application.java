@@ -6,7 +6,11 @@ package com.exspendite.a25961926.exspendite;
 import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobile.auth.core.IdentityManager;
 import android.support.multidex.MultiDexApplication;
+import com.amazonaws.mobile.auth.userpools.CognitoUserPoolsSignInProvider;
 
+/**
+ * Application class responsible for initializing singletons and other common components.
+ */
 public class Application extends MultiDexApplication
 {
     private static final String LOG_TAG = Application.class.getSimpleName();
@@ -24,10 +28,14 @@ public class Application extends MultiDexApplication
         AWSConfiguration awsConfiguration = new AWSConfiguration(getApplicationContext());
 
         // If IdentityManager is not created, create it
-        if (IdentityManager.getDefaultIdentityManager() == null) {
+        if (IdentityManager.getDefaultIdentityManager() == null)
+        {
             IdentityManager identityManager =
                     new IdentityManager(getApplicationContext(), awsConfiguration);
             IdentityManager.setDefaultIdentityManager(identityManager);
         }
+        // Add Amazon Cognito User Pools as Identity Provider.
+        IdentityManager.getDefaultIdentityManager().addSignInProvider(
+                CognitoUserPoolsSignInProvider.class);
     }
 }
