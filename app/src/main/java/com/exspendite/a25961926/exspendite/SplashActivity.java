@@ -8,15 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 
-import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobile.auth.core.IdentityManager;
 import com.amazonaws.mobile.auth.core.StartupAuthResultHandler;
 import com.amazonaws.mobile.auth.core.StartupAuthResult;
 import com.amazonaws.mobile.auth.core.DefaultSignInResultHandler;
 import com.amazonaws.mobile.auth.core.IdentityProvider;
 import com.amazonaws.mobile.auth.core.StartupAuthErrorDetails;
-import com.amazonaws.mobile.auth.core.StartupAuthResult;
-import com.amazonaws.mobile.auth.core.StartupAuthResultHandler;
 import com.amazonaws.mobile.auth.core.signin.AuthException;
 import com.amazonaws.mobile.auth.ui.AuthUIConfiguration;
 import com.amazonaws.mobile.auth.ui.SignInActivity;
