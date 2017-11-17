@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         final IdentityManager identityManager =
                 IdentityManager.getDefaultIdentityManager();
 
-        identityManager.doStartupAuth(this,
+        identityManager.doStartUpAuth(this,
                 new StartupAuthResultHandler()
                 {
                 @Override
