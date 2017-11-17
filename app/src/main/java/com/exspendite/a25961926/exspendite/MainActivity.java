@@ -1,113 +1,64 @@
 package com.exspendite.a25961926.exspendite;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
+    //set names for year drop down menu
+    Calendar now = Calendar.getInstance();   // Gets the current date and time
+    int year = now.get(Calendar.YEAR); // The current year
+    int yearm1 = year - 1;
+    int yearm2 = year - 2;
+    String sYear = Integer.toString(year), sYearm1 = Integer.toString(yearm1), sYearm2 = Integer.toString(yearm2);
+    String[] bankNames={sYear,sYearm1, sYearm2};
+    //set names for month drop down menu
+    String[] months={"January","February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        defineButtons();
+
+        Spinner spin = (Spinner) findViewById(R.id.simpleSpinner);
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, bankNames);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
+        spin.setOnItemSelectedListener(this);
+
+        Spinner spin2 = (Spinner) findViewById(R.id.monthSpinner);
+        ArrayAdapter<String> bb = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, months);
+        bb.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin2.setAdapter(bb);
+        spin2.setOnItemSelectedListener(this);
+
     }
 
+    //Performing action onItemSelected and onNothing selected
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    public void defineButtons()
-    {
-        findViewById(R.id.btnJan).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnFeb).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnMar).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnApr).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnMay).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnJune).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnJuly).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnAug).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnSept).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnOct).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnNov).setOnClickListener(buttonClickListener);
-        findViewById(R.id.btnDec).setOnClickListener(buttonClickListener);
-    }
-    private View.OnClickListener buttonClickListener = new View.OnClickListener()
-    {
-        @Override
-        public void onClick(View view)
+    public void onItemSelected(AdapterView<?> parent, View arg1, int position,long id) {
+        //Setting the ArrayAdapter data on the Spinner
+        Spinner spin = (Spinner)parent;
+        Spinner spin2 = (Spinner)parent;
+
+        if(spin.getId() == R.id.simpleSpinner) {
+            Toast.makeText(getApplicationContext(), bankNames[position], Toast.LENGTH_LONG).show();
+        }
+        if(spin2.getId() == R.id.monthSpinner)
         {
-            switch (view.getId())
-            {
-                case R.id.btnJan:
-                    Intent January = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(January);
-                    break;
-                case R.id.btnFeb:
-                    Intent February = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(February);
-                    break;
-                case R.id.btnMar:
-                    Intent March = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(March);
-                    break;
-                case R.id.btnApr:
-                    Intent April = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(April);
-                    break;
-                case R.id.btnMay:
-                    Intent May = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(May);
-                    break;
-                case R.id.btnJune:
-                    Intent June = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(June);
-                    break;
-                case R.id.btnJuly:
-                    Intent July = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(July);
-                    break;
-                case R.id.btnAug:
-                    Intent August = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(August);
-                    break;
-                case R.id.btnSept:
-                    Intent September = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(September);
-                    break;
-                case R.id.btnOct:
-                    Intent October = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(October);
-                    break;
-                case R.id.btnNov:
-                    Intent November = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(November);
-                    break;
-                case R.id.btnDec:
-                    Intent December = new Intent(MainActivity.this, ViewReceipts.class);
-                    startActivity(December);
-                    break;
-            }
+            Toast.makeText(getApplicationContext(), months[position], Toast.LENGTH_LONG).show();
         }
-    };
 
+    }
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onNothingSelected(AdapterView<?> parent){
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
     }
 }
